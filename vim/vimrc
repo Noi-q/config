@@ -1,0 +1,273 @@
+
+"--------------------
+"通用设置
+"--------------------
+
+let mapleader="  "
+set nocompatible		"设置不兼容原始vi模式
+set ttimeoutlen=0		"设置<ESC>键响应时间
+set wildmenu
+set mouse=a
+set backspace=indent,eol,start
+let &t_ut=''
+set foldmethod=manual
+set foldlevel=99
+set laststatus=2
+set autochdir
+set history=1000
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+"--------------------
+"识别文件
+"--------------------
+
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+
+au BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
+au BufNewFile,BufRead *.html,*.js,*.vue set expandtab
+au BufNewFile,BufRead *.html,*.js,*.vue set autoindent
+au BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+
+
+"--------------------
+"vim搜索
+"--------------------
+
+exec ":nohlsearch"
+set hlsearch
+set incsearch
+set ignorecase
+noremap <LEADER><CR> :nohlsearch<CR>
+
+
+"--------------------
+"缩进
+"--------------------
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set tw=0
+set indentexpr=
+
+
+"--------------------
+"编码设置
+"--------------------
+
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+set termencoding=utf-8
+set encoding=utf8
+set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
+
+
+"--------------------
+"样式
+"--------------------
+
+set number
+set relativenumber
+syntax enable                   "开启语法高亮功能
+syntax on                       "自动语法高亮
+set t_Co=256                    "设置256色支持
+set cmdheight=2                 "设置命令行的高度
+set showcmd                     "select模式下显示选中的行数
+set ruler                       "总是显示光标位置
+set laststatus=2                "总是显示状态栏
+set cursorline                  "高亮显示当前行
+set whichwrap+=<,>,h,l          "设置光标键跨行
+set scrolloff=5
+set virtualedit=block,onemore   "运行光标出现在最后一个字符的后面
+set noeb                        "关闭错误的提示
+
+
+"--------------------
+"vim快捷键更改
+"--------------------
+map s <nop>
+map S :w<CR>        "保存
+map Q :q<CR>        "退出
+map R :source $MYVIMRC<CR>          "加载vimrc文件
+
+
+"---------{
+"Instant-markdown
+"let g:instant_markdown_slow = 1
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_browser = 
+"let g:instant_markdown_port = 8888
+"let g:instant_markdown_autoscroll = 0
+"set shell=bash\ -i
+" 确保文件类型检测打开
+"filetype plugin on
+" 关闭实时预览
+"let g:instant_markdown_slow = 1
+" 关闭打开文件自动预览
+"let g:instant_markdown_autostart = 0
+" 开放给网络上的其他人
+"let g:instant_markdown_open_to_the_world = 1
+" 允许脚本允许
+"let g:instant_markdown_allow_unsafe_content = 1
+" 阻止外部资源加载
+"let g:instant_markdown_allow_external_content = 0
+"-------------------}
+
+
+
+
+"--------------------
+"vim插件
+"--------------------
+
+call plug#begin('~/.vim/plugged')       "插件路径包括
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'connorholyday/vim-snazzy'
+
+"----------------------------------
+Plug 'godlygeek/tabular'
+"                                  markdown                              
+
+Plug 'plasticboy/vim-markdown'
+
+"Plugin 'iamcco/markdown-preview.nvim'
+Plug 'iamcco/mathjax-support-for-mkdp'
+
+Plug 'iamcco/markdown-preview.vim'
+
+"Plug 'suan/vim-instant-markdown'
+
+"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
+
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"----------------------------------
+call plug#end()                         "插件结束
+"color snazzy                            "设置颜色为snazzy
+let g:SnazzyTranSparent = 1             "设置透明窗口，暂时没效果
+
+"call plugin#begin('~/.vim/plugged')
+
+"Plugin 'godlygeek/tabular'
+
+"Plugin 'plasticboy/vim-markdown'
+
+"call plugin#end()
+"
+"
+"
+"
+"
+"
+"Vim-Bundles
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"加载vimrc.bundles
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"tagbar  vim中右边的侧栏(设置快捷键和支持markdown标题)
+map <C-t> :TagbarToggle<CR>
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+    \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"NearTree  vim中左侧侧边栏设置快捷键为ctrl+b
+map <C-b> :NERDTreeToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Markdown  
+"disable folding
+let g:vim_markdown_folding_disabled=1
+" Highlight YAML frontmatter as used by Jekyll
+let g:vim_markdown_frontmatter=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"iamcco/Markdown-Preview  markdown预览的相关设置
+let g:mkdp_auto_start = 1
+let g:mkdp_path_to_chrome = "chromium"
+let g:mkdp_auto_open = 1
+let g:mkdp_auto_close = 1
+"let g:mkdp_refresh_slow = 1
+let g:mkdp_open_to_the_world = 1
+map <C-m> :MarkdownPreview<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<CR>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsUsePythonVersion = 3
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set nu
+set ts=4
+colorscheme torte
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"YouCompeleteMe  相关设置以及解决tab键和UltiSnips的键位冲突
+"function! g:UltiSnips_Complete()
+"      call UltiSnips#ExpandSnippet()
+"        if g:ulti_expand_res == 0
+"            if pumvisible()
+"                    return "\<C-n>"      
+"              else
+"                    call UltiSnips#JumpForwards()
+"                    if g:ulti_jump_forwards_res == 0
+"                        return "\<TAB>"
+"                endif
+"            endif
+"        endif
+"        return ""
+"    endfunction
+"
+"
+"
+"function! g:UltiSnips_Reverse()
+"    call UltiSnips#JumpBackwards()
+"    if g:ulti_jump_backwards_res == 0
+"        return "\<C-P>"
+"    endif
+"
+"    return ""
+"endfunction
+"
+"
+"if !exists("g:UltiSnipsJumpForwardTrigger")
+"    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"endif
+"if !exists("g:UltiSnipsJumpBackwardTrigger")
+"    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"endif
+"
+"au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+"au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"设置可以使用鼠标"        
+set mouse=a
