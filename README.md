@@ -1,1 +1,1 @@
-# .config
+# ArchLinux Config
