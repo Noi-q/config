@@ -3,9 +3,9 @@
 "## ## ##  ##"  "##     ##
 "##  #m##  ##    ##     ##
 "##   ###  "##mm##"  mmm##mmm
-"""   """    """"    """"""""
-"Author:Noi
-"email:928401297@qq.com
+"##   ###            ########
+"Author:Noi-q
+"Email:noi.vcal@gmail.com
 
 
 
