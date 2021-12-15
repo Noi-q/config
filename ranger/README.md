@@ -20,7 +20,7 @@ cd ~/.config/ranger
 
 `sudo pacman -S w3m`
 
-- vim ~/ranger/rc.conf
+- vim ~/.config/ranger/rc.conf
 
 `set preview_images true`
 
