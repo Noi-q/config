@@ -8,7 +8,7 @@
 ```
 sudo pacman -S ranger
 git clone https://github.com/Noi-q/ranger.git
-mv ranger ~/.config
+cp config/ranger ~/.config
 cd ~/.config/ranger
 ```
 
